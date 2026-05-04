@@ -24,8 +24,8 @@
 <div align="center">
 
 
-[![ProtonMail](https://img.shields.io/badge/ProtonMail-000000?style=flat-square&logo=protonmail&logoColor=white)](mailto:your@email.com)
+[![ProtonMail](https://img.shields.io/badge/ProtonMail-000000?style=flat-square&logo=protonmail&logoColor=white)](mailto:venera01800@protonmail.com)
 
-[![Mastodon](https://img.shields.io/badge/Mastodon-000000?style=flat-square&logo=mastodon&logoColor=white)](https://mastodon.social/@yourusername)
+[![Mastodon](https://img.shields.io/badge/Mastodon-000000?style=flat-square&logo=mastodon&logoColor=white)](https://mastodon.social/@mr_monohrome)
 
 </div>
