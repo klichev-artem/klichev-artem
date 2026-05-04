@@ -1,1 +1,31 @@
+<div align="center">
+<img height="336" alt="image" src="https://github.com/user-attachments/assets/76b9aea3-7d6d-416e-8e78-72200292b8ad" />
 
+</div>
+<br>
+<br>
+<div align="center">
+  
+![Linux](https://img.shields.io/badge/Linux-black?style=flat-square&logo=linux&logoColor=white)
+![Bash](https://img.shields.io/badge/Bash-black?style=flat-square&logo=gnubash&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-black?style=flat-square&logo=docker&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-black?style=flat-square&logo=kubernetes&logoColor=white)
+
+![CI/CD](https://img.shields.io/badge/CI%2FCD-black?style=flat-square&logo=githubactions&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-black?style=flat-square&logo=terraform&logoColor=white)
+![Ansible](https://img.shields.io/badge/Ansible-black?style=flat-square&logo=ansible&logoColor=white)
+
+![Monitoring](https://img.shields.io/badge/Monitoring-black?style=flat-square)
+![Logging](https://img.shields.io/badge/Logging-black?style=flat-square)
+
+</div>
+<br>
+<br>
+<div align="center">
+
+
+[![ProtonMail](https://img.shields.io/badge/ProtonMail-000000?style=flat-square&logo=protonmail&logoColor=white)](mailto:your@email.com)
+
+[![Mastodon](https://img.shields.io/badge/Mastodon-000000?style=flat-square&logo=mastodon&logoColor=white)](https://mastodon.social/@yourusername)
+
+</div>
