@@ -3,168 +3,436 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rizza</title>
-
+  <title>DevOps Portfolio</title>
   <style>
+    :root {
+      --bg: #050505;
+      --fg: #eeeeee;
+      --muted: #a7a7a7;
+      --dim: #6f6f6f;
+      --line: #d7d7d7;
+      --accent: #ffffff;
+    }
+
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
       margin: 0;
       min-height: 100vh;
-      background: #f7f5ef;
-      color: #1f1f1f;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      color: var(--fg);
+      background:
+        radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.08), transparent 32rem),
+        var(--bg);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 13px;
+      line-height: 1.45;
     }
 
-    main {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 64px;
-      padding: 80px;
+    a {
+      color: var(--fg);
+      text-decoration: none;
+      border-bottom: 1px solid var(--dim);
     }
 
-    .content {
-      max-width: 680px;
-      align-self: center;
+    a:hover {
+      border-bottom-color: var(--fg);
     }
 
-    .mark {
-      font-size: 14px;
-      letter-spacing: 0.24em;
-      color: #777;
-      margin-bottom: 72px;
+    .terminal {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 28px 0 38px;
     }
 
-    h1 {
-      font-size: clamp(48px, 8vw, 112px);
-      font-weight: 400;
-      line-height: 0.9;
-      margin: 0;
+    .scanline {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.025) 0px,
+        rgba(255, 255, 255, 0.025) 1px,
+        transparent 1px,
+        transparent 4px
+      );
+      opacity: 0.25;
+      mix-blend-mode: screen;
     }
 
-    .subtitle {
-      margin-top: 24px;
-      font-size: 15px;
-      color: #555;
+    .top-line,
+    .bottom-line {
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
     }
 
-    section {
-      margin-top: 72px;
+    .ascii-title {
+      margin: 12px 0 10px;
+      font-size: clamp(8px, 1.45vw, 17px);
+      line-height: 0.92;
+      letter-spacing: -1px;
+      white-space: pre;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .ascii-title::-webkit-scrollbar,
+    pre::-webkit-scrollbar {
+      display: none;
+    }
+
+    .meta,
+    .tags {
+      text-align: center;
+      color: var(--muted);
+      margin: 10px 0;
+    }
+
+    .tags span::before {
+      content: "# ";
+      color: var(--fg);
+    }
+
+    .rule {
+      margin: 18px 0;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .intro {
+      max-width: 940px;
+      margin: 0 0 32px;
+    }
+
+    .prompt {
+      color: var(--fg);
+    }
+
+    .muted {
+      color: var(--muted);
     }
 
     h2 {
+      margin: 36px 0 18px;
       font-size: 13px;
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #777;
-      margin-bottom: 20px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
     }
 
-    p, pre {
-      font-size: 15px;
-      line-height: 1.8;
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
     }
 
-    pre {
+    .box {
+      border: 1px solid var(--line);
+      padding: 18px;
+      min-height: 100%;
+      position: relative;
+    }
+
+    .box::before {
+      content: attr(data-title);
+      position: absolute;
+      top: -10px;
+      left: 14px;
+      padding: 0 8px;
+      background: var(--bg);
+      color: var(--fg);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 10px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 12px;
+    }
+
+    .year {
+      color: var(--muted);
+    }
+
+    .dash {
+      color: var(--dim);
+    }
+
+    .skills-map {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 6px;
+    }
+
+    .skill h3 {
+      margin: 0 0 8px;
+      font-size: 13px;
+      color: var(--fg);
+    }
+
+    .skill p {
       margin: 0;
-      font-family: inherit;
-      color: #333;
-      white-space: pre-wrap;
+      color: var(--muted);
     }
 
-    .vertical {
-      writing-mode: vertical-rl;
-      text-orientation: upright;
-      letter-spacing: 0.4em;
-      font-size: 18px;
-      color: #333;
-      align-self: center;
-      opacity: 0.65;
+    .projects {
+      display: grid;
+      gap: 12px;
     }
 
-    .line {
-      width: 1px;
-      height: 160px;
-      background: #1f1f1f;
-      opacity: 0.18;
-      margin: 40px auto;
+    .project {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 12px;
+    }
+
+    .project-id {
+      color: var(--muted);
+    }
+
+    .project strong {
+      color: var(--fg);
+    }
+
+    .project p {
+      margin: 2px 0 0;
+      color: var(--muted);
+    }
+
+    .diagram {
+      color: var(--muted);
+      white-space: pre;
+      overflow-x: auto;
+      margin: 0;
+    }
+
+    .contact {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 28px 0 12px;
+      color: var(--muted);
     }
 
     footer {
-      margin-top: 96px;
-      color: #777;
-      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      color: var(--muted);
+      margin-top: 22px;
     }
 
-    @media (max-width: 720px) {
-      main {
-        grid-template-columns: 1fr;
-        padding: 40px 24px;
+    @media (max-width: 820px) {
+      body {
+        font-size: 12px;
       }
 
-      .vertical {
-        writing-mode: horizontal-tb;
-        letter-spacing: 0.2em;
-        font-size: 14px;
-        order: -1;
+      .grid,
+      .skills-map {
+        grid-template-columns: 1fr;
+      }
+
+      .row,
+      .project {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+
+      footer {
+        flex-direction: column;
       }
     }
   </style>
 </head>
-
 <body>
-  <main>
-    <div class="content">
-      <div class="mark">MINIMAL · LINUX · OPEN SOURCE</div>
+  <div class="scanline" aria-hidden="true"></div>
 
-      <h1>Rizza</h1>
+  <main class="terminal">
+    <div class="top-line">&lt;====================== please resize your application window to see this on just one line ======================&gt;</div>
 
-      <div class="subtitle">
-        DevOps Engineer · quiet infrastructure · reliable systems
+    <pre class="ascii-title" aria-label="DevOps portfolio ASCII title">
+██████╗ ███████╗██╗   ██╗ ██████╗ ██████╗ ███████╗
+██╔══██╗██╔════╝██║   ██║██╔═══██╗██╔══██╗██╔════╝
+██║  ██║█████╗  ██║   ██║██║   ██║██████╔╝███████╗
+██║  ██║██╔══╝  ╚██╗ ██╔╝██║   ██║██╔═══╝ ╚════██║
+██████╔╝███████╗ ╚████╔╝ ╚██████╔╝██║     ███████║
+╚═════╝ ╚══════╝  ╚═══╝   ╚═════╝ ╚═╝     ╚══════╝
+    </pre>
+
+    <div class="meta">
+      yourname@protonmail.com /\ github.com/yourname /\ mastodon.social/@yourname /\ somewhere, earth
+    </div>
+
+    <div class="tags">
+      <span>Linux</span> &nbsp; <span>Automation</span> &nbsp; <span>Containers</span> &nbsp; <span>Infrastructure as Code</span> &nbsp; <span>Observability</span>
+    </div>
+
+    <div class="rule">/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\</div>
+
+    <section class="intro" id="about">
+      <p><span class="prompt">Hello.</span> This page is a small terminal-shaped portfolio and a DevOps resume.</p>
+      <p>I build infrastructure that does not ask for attention: deployments happen, services run, failures recover, and alerts mean something.</p>
+      <p class="muted">Current focus: production reliability, Kubernetes operations, CI/CD pipelines, Terraform modules, monitoring, and keeping systems boring in the best possible way.</p>
+    </section>
+
+    <section class="grid">
+      <div class="box" data-title="LEGEND">
+        <pre class="diagram">
++----------------------------+
+| fields                     |
+| * infrastructure           |
+| * ci/cd                    |
+| * containers               |
+| * observability            |
+| * automation               |
++----------------------------+
+        </pre>
       </div>
 
-      <section>
-        <h2>About</h2>
-        <p>
-          I build simple infrastructure with clean automation,
-          minimal noise, and a linux-first mindset.
-        </p>
-      </section>
+      <div class="box" data-title="STATUS">
+        <pre class="diagram">
+service: portfolio.devops
+state:   running
+uptime:  quietly stable
+mode:    automation-first
+noise:   reduced
+        </pre>
+      </div>
+    </section>
 
-      <section>
-        <h2>Stack</h2>
-        <pre>Linux
-Docker · Kubernetes
-Terraform · Ansible
-GitHub Actions · GitLab CI
-Prometheus · Grafana
-AWS · GCP</pre>
-      </section>
+    <h2>### Selected timeline ###</h2>
 
-      <section>
-        <h2>Principles</h2>
-        <pre>minimalism
-open source
-independence
-stability over noise</pre>
-      </section>
+    <section class="box" data-title="EXPERIENCE">
+      <div class="timeline">
+        <div class="row">
+          <span class="year">2023</span>
+          <span><span class="dash">|----</span> started building Linux-based deployment environments</span>
+        </div>
+        <div class="row">
+          <span class="year">2024</span>
+          <span><span class="dash">|--------</span> containerized services with Docker and composed local stacks</span>
+        </div>
+        <div class="row">
+          <span class="year">2025</span>
+          <span><span class="dash">|--------------</span> designed CI/CD flows, GitHub Actions pipelines, and release automation</span>
+        </div>
+        <div class="row">
+          <span class="year">now</span>
+          <span><span class="dash">|--------------------</span> learning deeper Kubernetes, Terraform, observability, and production patterns</span>
+        </div>
+      </div>
+    </section>
 
-      <footer>
-        reduce dependencies — increase freedom
-      </footer>
+    <h2>### DevOps skills ###</h2>
+
+    <section class="box" data-title="STACK">
+      <div class="skills-map">
+        <div class="skill">
+          <h3>[01] systems</h3>
+          <p>Linux / Bash / Networking / NGINX</p>
+        </div>
+        <div class="skill">
+          <h3>[02] containers</h3>
+          <p>Docker / Docker Compose / Kubernetes</p>
+        </div>
+        <div class="skill">
+          <h3>[03] delivery</h3>
+          <p>CI/CD / GitHub Actions / pipelines</p>
+        </div>
+        <div class="skill">
+          <h3>[04] infrastructure</h3>
+          <p>Terraform / Ansible / IaC patterns</p>
+        </div>
+        <div class="skill">
+          <h3>[05] observability</h3>
+          <p>Monitoring / Logging / Alerting</p>
+        </div>
+        <div class="skill">
+          <h3>[06] mindset</h3>
+          <p>Reliability / automation / clean operations</p>
+        </div>
+      </div>
+    </section>
+
+    <h2>### Selected works ###</h2>
+
+    <section class="box" data-title="PROJECTS">
+      <div class="projects">
+        <div class="project">
+          <span class="project-id">&gt;01</span>
+          <div>
+            <strong>CI/CD pipeline</strong>
+            <p>build, test, containerize, and deploy application changes from commit to release.</p>
+          </div>
+        </div>
+        <div class="project">
+          <span class="project-id">&gt;02</span>
+          <div>
+            <strong>Containerized service stack</strong>
+            <p>Docker-based local and staging environments with predictable configuration.</p>
+          </div>
+        </div>
+        <div class="project">
+          <span class="project-id">&gt;03</span>
+          <div>
+            <strong>Infrastructure as Code</strong>
+            <p>reproducible infrastructure layout using Terraform modules and Ansible provisioning.</p>
+          </div>
+        </div>
+        <div class="project">
+          <span class="project-id">&gt;04</span>
+          <div>
+            <strong>Observability baseline</strong>
+            <p>metrics, logs, alerts, and dashboards designed to catch problems before users do.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2>### System map ###</h2>
+
+    <section class="box" data-title="FLOW">
+      <pre class="diagram">
+ developer
+    |
+    | git push
+    v
++-----------+      +------------+      +-------------+      +--------------+
+|  github   | ---> |  ci / cd   | ---> |  registry   | ---> |  kubernetes  |
++-----------+      +------------+      +-------------+      +--------------+
+                          |                                      |
+                          | tests                                | metrics / logs
+                          v                                      v
+                    +-----------+                          +-------------+
+                    | quality   |                          | monitoring  |
+                    +-----------+                          +-------------+
+      </pre>
+    </section>
+
+    <div class="contact" id="contact">
+      <span><a href="mailto:yourname@protonmail.com">protonmail</a></span>
+      <span>/\</span>
+      <span><a href="https://github.com/yourname">github</a></span>
+      <span>/\</span>
+      <span><a href="https://mastodon.social/@yourname">mastodon</a></span>
     </div>
 
-    <div class="vertical">
-      余白
-      <div class="line"></div>
-      静けさ
-      <div class="line"></div>
-      自由
-    </div>
+    <footer>
+      <span>&lt;============================== EOF ==============================></span>
+      <span>made with care and terminal noise</span>
+    </footer>
   </main>
 </body>
 </html>
