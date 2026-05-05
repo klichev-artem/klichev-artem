@@ -9,8 +9,10 @@
   
 ![Linux](https://img.shields.io/badge/Linux-black?style=flat-square&logo=linux&logoColor=white)
 ![Bash](https://img.shields.io/badge/Bash-black?style=flat-square&logo=gnubash&logoColor=white)
+![Python](https://img.shields.io/badge/Python-black?style=flat-square&logo=python&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-black?style=flat-square&logo=docker&logoColor=white)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-black?style=flat-square&logo=kubernetes&logoColor=white)
+
 
 ![CI/CD](https://img.shields.io/badge/CI%2FCD-black?style=flat-square&logo=githubactions&logoColor=white)
 ![Terraform](https://img.shields.io/badge/Terraform-black?style=flat-square&logo=terraform&logoColor=white)
@@ -21,7 +23,7 @@
 
 </div>
 <br>
-<br>
+
 <div align="center">
 
 
